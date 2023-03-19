@@ -232,7 +232,7 @@ function startGame() {
                 }
             }
             
-        }, 1)
+        }, 0.1)
     
 }
 
