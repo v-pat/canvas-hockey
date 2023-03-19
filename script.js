@@ -8,7 +8,7 @@ var cx = (this.canvas.width / 2) - 2;
 var cy = (this.canvas.height / 2) - 10;
 var barWidth = 20;
 var barHeight = 75;
-var ballSpeed = 10;
+var ballSpeed = 1;
 var leftPadPosition={x:5,y:this.padsInitialY};
 var rightPadPosition={x:this.canvas.width - 25,y:this.padsInitialY};
 var lastGoalby = 'right';
@@ -250,21 +250,11 @@ function writeScore(scorer){
     clearInterval(this.intervalId);
 }
 function reset() {
+    const startBtn=document.getElementById('startBtn');
+    startBtn.disabled = false;
     this.gameStarted=false;
     this.setUpCanvas();
     clearInterval(this.intervalId);
     const scoreCard = document.getElementById('scorecount');
     scoreCard.innerHTML="00:00";
-}
-
-function levelChange(event){
-    if(event.target.value=='easy'){
-        this.ballSpeed=10;
-    }else if(event.target.value=='medium'){
-        this.ballSpeed=5;
-
-    }else if(event.target.value=='hard'){
-        this.ballSpeed=1;
-        
-    }
 }
