@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-canvas.height = window.innerHeight - (2 * canvas.offsetTop);
+canvas.height = window.innerHeight - (2*canvas.offsetTop);
 canvas.width = window.innerWidth - (2 * canvas.offsetLeft);
 var dx = 4;
 var dy = 30;
@@ -43,6 +43,7 @@ this.Ball((this.canvas.width / 2) - 2, (this.canvas.height / 2) - 10);
 window.addEventListener('resize', function () {
     canvas.height = window.innerHeight - (2 * canvas.offsetTop);
     canvas.width = window.innerWidth - (2 * canvas.offsetLeft);
+    this.reset();
 })
 
 window.addEventListener('keydown', (e) => {
@@ -50,6 +51,10 @@ window.addEventListener('keydown', (e) => {
         this.player1KeyPress(e);
     } else if (e.key == 'ArrowUp' || e.key == 'ArrowDown') {
         this.player2KeyPress(e);
+    }else if (e.key==' '){
+        this.startGame();
+    }else if (e.key=='r'){
+        this.reset();
     }
 });
 
@@ -257,4 +262,14 @@ function reset() {
     clearInterval(this.intervalId);
     const scoreCard = document.getElementById('scorecount');
     scoreCard.innerHTML="00:00";
+}
+
+function showControls(){
+    let msg=`
+        1. Space button will start the game.
+        2. 'r' button will reset the game.
+        3. 'w' and 's' will move left pad upward and downward respectively.
+        4. Arrow up and Arrow down will move right pad upward and   downward respectively.
+    `
+    alert(msg);
 }
