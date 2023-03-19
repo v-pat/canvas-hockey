@@ -2,7 +2,6 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 canvas.height = window.innerHeight - (2*canvas.offsetTop);
 canvas.width = window.innerWidth - (2 * canvas.offsetLeft);
-
 var dx = 4;
 var dy = 30;
 var cx = (this.canvas.width / 2) - 2;
@@ -146,6 +145,8 @@ var xDyU = false;
 
 var ballDirections=[{xUyU:true},{xUyD:false},{xDyD:false},{xDyU:false}];
 
+var balldx=4;
+var balldy=4;
 function setBallDirection(dir) {
     this.xUyU = false;
     this.xUyD = false;
@@ -160,20 +161,20 @@ function setBallDirection(dir) {
     }
     if (dir == 'xUyU') {
         this.xUyU = true;
-        this.cx += 1;
-        this.cy += 1;
+        this.cx += this.balldx;
+        this.cy += this.balldy;
     } else if (dir == 'xUyD') {
         this.xUyD = true;
-        this.cx += 1;
-        this.cy -= 1;
+        this.cx += this.balldx;
+        this.cy -= this.balldy;
     } else if (dir == 'xDyD') {
         this.xDyD = true;
-        this.cx -= 1;
-        this.cy -= 1;
+        this.cx -= this.balldx;
+        this.cy -= this.balldy;
     } else if (dir == 'xDyU') {
         this.xDyU = true;
-        this.cx -= 1;
-        this.cy += 1;
+        this.cx -= this.balldx;
+        this.cy += this.balldy;
     }
     this.Ball(this.cx, this.cy);
 }
@@ -233,7 +234,7 @@ function startGame() {
                 }
             }
             
-        }, 0.1)
+        }, 10)
     
 }
 
