@@ -7,8 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
 </head>
 <style type="text/css">
     * {
@@ -17,7 +20,7 @@
         box-sizing: border-box;
     }
 
-    body{
+    body {
         min-height: 100vh;
     }
 
@@ -25,19 +28,82 @@
         background-color: black;
     }
 
-    #scorecard{
-        height:30px;
-        width:100%;
+    #scorecard {
+        height: 30px;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 5px;
     }
 
-    #dummy-btn{
+    #dummy-btn {
         cursor: default;
     }
 
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        transition: opacity 500ms;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .overlay:target {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .popup {
+        margin: 70px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        width: 30%;
+        position: relative;
+        transition: all 5s ease-in-out;
+    }
+
+    .popup h2 {
+        margin-top: 0;
+        color: #333;
+        font-family: Tahoma, Arial, sans-serif;
+    }
+
+    .popup .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        transition: all 200ms;
+        font-size: 30px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .popup .close:hover {
+        color: #06D85F;
+    }
+
+    .popup .content {
+        max-height: 30%;
+        overflow: auto;
+    }
+
+    @media screen and (max-width: 700px) {
+        .box {
+            width: 70%;
+        }
+
+        .popup {
+            width: 70%;
+        }
+    }
 </style>
 
 <body class="p-4">
@@ -46,18 +112,42 @@
         <h4>PONG GAME</h4>
     </div>
     <div id="scorecard">
-        <button id="dummy-btn" class="btn btn-link text-white">
-            controls?
-        </button>
+        <a id="dummy-btn" class="btn btn-link"  href="#popup1">
+            Settings
+        </a>
         <button class="btn btn-primary" id="startBtn" onclick="startGame()">Start</button>
-        <h5 id="scorecount">00:00</h5>
+        <div class="d-flex flex-row align-items-center">
+            <input readonly id="p1DisplayName" style="width: 100px;height:30px;margin-right: 5px;" />
+            <h5 id="scorecount">00:00</h5>
+            <input readonly id="p2DisplayName" style="width: 100px;height:30px;margin-left: 5px;" />
+        </div>
         <button class="btn btn-primary" onclick="reset()">Reset</button>
         <button class="btn btn-link" onclick="showControls()">
             controls?
         </button>
     </div>
     <canvas id="canvas" height="0" width="0"></canvas>
-    
+    <div id="popup1" class="overlay">
+        <div class="popup">
+            <h2>Enter players Names</h2>
+            <a class="close" id="closePopup" href="#">&times;</a>
+            <div class="content">
+                <div class="form-group">
+                    <label>Player 1</label>
+                    <input id="pr1"class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>Player 2</label>
+                    <input id="pr2"class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>No. of goals to win</label>
+                    <input id="totalGoals"type="number" min="1" max="50" class="form-control"/>
+                </div>
+                <button class="btn btn-primary" onclick="playerInfoSubmit()">Done</button>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 

@@ -2,6 +2,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 canvas.height = window.innerHeight - (2*canvas.offsetTop);
 canvas.width = window.innerWidth - (2 * canvas.offsetLeft);
+
 var dx = 4;
 var dy = 30;
 var cx = (this.canvas.width / 2) - 2;
@@ -251,6 +252,13 @@ function writeScore(scorer){
         this.scoreCount.right+=1;
         scoreCard.innerHTML=this.scoreCount.left+':'+this.scoreCount.right;
     }
+    if(this.scoreCount.left==this.total_goals){
+        alert(this.pr1+" wins!!");
+        this.reset();
+    }else if(this.scoreCount.right==this.total_goals){
+        alert(this.pr2+" wins!!");
+        this.reset();
+    }
     this.gameStarted=false;
     clearInterval(this.intervalId);
 }
@@ -272,4 +280,31 @@ function showControls(){
         4. Arrow up and Arrow down will move right pad upward and   downward respectively.
     `
     alert(msg);
+}
+var pr1='player 1';
+var pr2='player 2';
+var total_goals=5;
+this.setPlayersName();
+function playerInfoSubmit(){
+    const pr1Name=document.getElementById('pr1');
+    const pr2Name=document.getElementById('pr2');
+    const totalGoals=document.getElementById('totalGoals');
+    const closePopoup =document.getElementById('closePopup');
+    if(pr1Name.value!='' && pr2Name.value!='' && totalGoals.value!=''){
+        this.pr1=pr1Name.value;
+        this.pr2=pr2Name.value;
+        this.total_goals=totalGoals.value;
+        this.setPlayersName();
+        closePopoup.click();
+    }else{
+        alert('Please provide valid information.')
+    }
+}
+
+function setPlayersName(){
+    const p1display =document.getElementById('p1DisplayName');
+    const p2display =document.getElementById('p2DisplayName');
+
+    p1display.value = this.pr1;
+    p2display.value = this.pr2;
 }
