@@ -232,7 +232,7 @@ function startGame() {
                 }
             }
             
-        }, this.ballSpeed)
+        }, 1)
     
 }
 
